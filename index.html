@@ -35,12 +35,12 @@
                 <div class="form-group col-md">
                     <label for="ciphered-text">Зашифрованный текст</label>
                     <input type="text" class="form-control" id="ciphered-text" placeholder="текст"
-                        v-bind:value="outCiphMessage">
+                        v-bind:value="outCiphMessage" readonly>
                 </div>
             </div>
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-6">
-                    <button class="btn btn-primary" @click="()=>{inpToDeCipherMess=outCiphMessage;decryptOnChange()}">
+                    <button class="btn btn-primary mt-2 " @click="()=>{inpToDeCipherMess=outCiphMessage;decryptOnChange()}">
                         Перенести зашифрованный текст в дешифруемый текст
                     </button>
                 </div>
@@ -54,7 +54,7 @@
                 <div class="form-group col-md">
                     <label for="deciphered-text">Дешифрованный текст</label>
                     <input type="text" class="form-control" id="deciphered-text" placeholder="текст"
-                        v-bind:value="outDeCipherMess">
+                        v-bind:value="outDeCipherMess" readonly>
                 </div>
             </div>
         </div>
