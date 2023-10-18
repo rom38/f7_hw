@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>CodePen - F7_HW</title>
-    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.0.2/css/bootstrap.min.css'>
+    <link rel='stylesheet' href='./bootstrap.min.css'>
 
 </head>
 
@@ -13,59 +13,48 @@
     <script type="importmap">
   {
     "imports": {
-      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      "vue": "./vue.esm-browser.js"
     }
   }
 </script>
     <div id="app">
-        <button class="btn btn-primary" @click="count++">
-            Count is: {{ count }}
-        </button>
-        <p>
-            {{inp_mess}}
-        </p>
-        <div>
-            <label>Шифруемый Текст
-                <input v-model="count" />
-            </label>
-            <label>Зашифрованный текст
-                <input v-model="inp_mess" />
-            </label>
-        </div>
-        <div>
-            <label>Зашифрованный текст
-                <input class="form-control" v-model="count" />
-            </label>
-            <label>Дешифрованный текст
-                <input v-model="inp_mess" />
-            </label>
-        </div>
-
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="form-group col-md-3">
                     <label for="n-steps">Сдвиг, n</label>
-                    <input type="text" class="form-control" id="n-steps" placeholder="3" v-model="nSteps">
+                    <input type="text" class="form-control" id="n-steps" placeholder="3" v-model.number="nSteps"
+                        @input="()=>{encryptOnChange();decryptOnChange()}">
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md">
                     <label for="for-cipher">Шифруемый текст</label>
-                    <input type="email" class="form-control" id="for-cipher" placeholder="Email" v-model="inp_mess">
+                    <input type="text" class="form-control" id="for-cipher" placeholder="текст" v-model="inp_mess"
+                        @input="encryptOnChange">
                 </div>
                 <div class="form-group col-md">
                     <label for="ciphered-text">Зашифрованный текст</label>
-                    <input type="password" class="form-control" id="ciphered-text" placeholder="Password">
+                    <input type="text" class="form-control" id="ciphered-text" placeholder="текст"
+                        v-bind:value="outCiphMessage">
+                </div>
+            </div>
+            <div class="row justify-content-md-center">
+                <div class="form-group col-md-6">
+                    <button class="btn btn-primary" @click="()=>{inpToDeCipherMess=outCiphMessage;decryptOnChange()}">
+                        Перенести зашифрованный текст в дешифруемый текст
+                    </button>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md">
                     <label for="ciphered-text2">Дешифруемый текст</label>
-                    <input type="email" class="form-control" id="ciphered-text2" placeholder="Email">
+                    <input type="text" class="form-control" id="ciphered-text2" placeholder="текст"
+                        v-model="inpToDeCipherMess" @input="decryptOnChange">
                 </div>
                 <div class="form-group col-md">
                     <label for="deciphered-text">Дешифрованный текст</label>
-                    <input type="password" class="form-control" id="deciphered-text" placeholder="Password">
+                    <input type="text" class="form-control" id="deciphered-text" placeholder="текст"
+                        v-bind:value="outDeCipherMess">
                 </div>
             </div>
         </div>
